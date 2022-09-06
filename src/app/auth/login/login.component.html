@@ -1,0 +1,72 @@
+<div class="container">
+  <div *ngIf="errorMessage; then errorBlock; else formBlock"></div>
+  <ng-template #formBlock>
+    <form (ngSubmit)="onSubmit()" class="form" [formGroup]="form">
+      <img src="./../../../assets/crm.webp" alt="" width="300" />
+      <h1>Sign in</h1>
+      <mat-form-field appearance="fill" class="form-control">
+        <mat-label>Enter your email</mat-label>
+        <input
+          matInput
+          type="email"
+          class="right-align"
+          formControlName="email"
+        />
+        <mat-error *ngIf="form.get('email')?.hasError('email')"
+          >Please, enter correct email format</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-control">
+        <mat-label>Enter your password</mat-label>
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          formControlName="password"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+          style="border: none; background-color: transparent"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+        <mat-error *ngIf="form.get('password')?.hasError('minlength')">
+          Password must contain min.
+          {{ (form.get("password")?.errors)!["minlength"].requiredLength }}
+          symbols. Current length is
+          {{ (form.get("password")?.errors)!["minlength"].actualLength }}
+        </mat-error>
+      </mat-form-field>
+
+      <div>
+        <button
+          mat-raised-button
+          color="primary"
+          class="btn"
+          [disabled]="!!form.invalid"
+        >
+          Enter site
+        </button>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #errorBlock>
+    <div class="error">
+      <h1>{{ errorMessage }}</h1>
+
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="errorMessage = ''"
+        style="margin-left: '10px'; max-width: '200px'"
+      >
+        back to Sign in
+      </button>
+    </div>
+  </ng-template>
+</div>
