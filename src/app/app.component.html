@@ -1,3 +1,4 @@
+<!-- Progress bar -->
 <mat-progress-bar
   *ngIf="isLoading"
   class="progress-bar"
@@ -6,25 +7,31 @@
 
 <div *ngIf="!authService.isLogined(); then loginBlock; else mainBlock"></div>
 
+<!-- Login content -->
 <ng-template #loginBlock>
   <auth-login></auth-login>
 </ng-template>
 
+<!-- Main content -->
 <ng-template #mainBlock>
   <mat-sidenav-container class="container" autosize fullscreen>
-    <mat-sidenav mode="side" opened class="left-side">
+    <mat-sidenav #leftMenu mode="side" opened class="left-side">
       <mat-card class="card">
         <div class="user">
           <mat-card-header>
             <div mat-card-avatar class="header-image">
               <img
-                src="./../assets/avatar.webp"
+                [src]="userProfile.avatar"
                 alt=""
                 style="max-width: '50px'"
               />
             </div>
-            <mat-card-title>Rayan</mat-card-title>
-            <mat-card-subtitle>Admin</mat-card-subtitle>
+
+            <mat-card-title>Admin</mat-card-title>
+            <mat-card-subtitle
+              >{{ userProfile.first_name }}
+              {{ userProfile.last_name }}</mat-card-subtitle
+            >
           </mat-card-header>
         </div>
 
@@ -35,18 +42,23 @@
           <mat-icon [matMenuTriggerFor]="menu">more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>View profile</button>
-          <button mat-menu-item>Change Password</button>
+          <button
+            mat-menu-item
+            (click)="leftMenu.toggle(); profileState = !profileState"
+          >
+            View profile
+          </button>
           <button mat-menu-item (click)="authService.logout()">Logout</button>
         </mat-menu>
       </mat-card>
 
+      <!-- Navigation -->
       <mat-nav-list class="nav-list">
-        <a mat-list-item routerLink="dashboard">
+        <a mat-list-item routerLink="">
           <mat-icon mat-list-icon>home</mat-icon>
           <span mat-line>Home</span>
         </a>
-        <a mat-list-item routerLink="orders">
+        <a mat-list-item routerLink="dashboard">
           <mat-icon mat-list-icon>desktop_windows</mat-icon>
           <span mat-line>My Dashboard</span>
         </a>
@@ -76,16 +88,22 @@
         </a>
       </mat-nav-list>
     </mat-sidenav>
+
+    <!-- Content -->
     <mat-sidenav-content>
-      <mat-toolbar dark color="primary">
+      <mat-toolbar dark style="background-color: #001645; color: #fff">
         <button
           mat-icon-button
           class="example-icon"
           aria-label="Example icon-button with menu icon"
+          (click)="leftMenu.toggle(); panelState = !panelState"
         >
-          <mat-icon>zoom_out_map</mat-icon>
+          <mat-icon>{{
+            panelState ? "keyboard_tab" : "zoom_out_map"
+          }}</mat-icon>
         </button>
         <span>CRM</span>
+
         <span class="spacer"></span>
         <div class="communications">
           <button
@@ -118,7 +136,42 @@
           </button>
         </div>
       </mat-toolbar>
+
+      <!-- Rendered Content -->
       <router-outlet></router-outlet>
+      <!-- View Profile Card -->
+
+      <div
+        class="profile-body"
+        *ngIf="profileState"
+        (click)="leftMenu.toggle(); profileState = !profileState"
+      >
+        <div class="profile-panel" (click)="$event.stopPropagation()">
+          <div class="profile-image">
+            <img [src]="userProfile.avatar" width="200px" />
+          </div>
+          <div class="profile-detail">
+            <h1>
+              {{ userProfile.first_name | uppercase }}
+              {{ userProfile.last_name | uppercase }}
+            </h1>
+            <div style="text-align: start">
+              <p><b>e-mail:</b> {{ userProfile.email }}</p>
+              <p><b>user ID:</b> {{ userProfile.id }}</p>
+            </div>
+
+            <button
+              mat-raised-button
+              color="warn"
+              routerLink="/dashboard"
+              style="margin-top: '20px'"
+              (click)="leftMenu.toggle(); profileState = !profileState"
+            >
+              <span>{{ "close" | uppercase }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </ng-template>

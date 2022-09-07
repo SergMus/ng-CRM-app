@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.email,
       ]),
-      password: new FormControl('cityslicka', [
+      password: new FormControl('pistol', [
         Validators.required,
         Validators.minLength(6),
       ]),

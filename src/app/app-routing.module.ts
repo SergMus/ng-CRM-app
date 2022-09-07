@@ -2,21 +2,23 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
-  // {
-  //   path: 'auth',
-  //   loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-  // },
+  {
+    path: '',
+    component: HomeComponent,
+    pathMatch: 'full',
+  },
   {
     path: 'dashboard',
     component: DashboardComponent,
   },
   {
-    path: 'users',
+    path: 'customers',
     loadChildren: () =>
-      import('./users/users.module').then((m) => m.UsersModule),
+      import('./customers/customers.module').then((m) => m.CustomersModule),
   },
   { path: 'not-found', component: NotFoundComponent },
   {

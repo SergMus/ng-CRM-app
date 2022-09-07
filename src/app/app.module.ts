@@ -8,8 +8,6 @@ import { AuthModule } from './auth/auth.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { LoaderComponent } from './loader/loader.component';
-import { UsersModule } from './users/users.module';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AuthInterceptor } from './_interceptors/auth.interceptor';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -20,6 +18,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { CustomersModule } from './customers/customers.module';
+import { HomeComponent } from './home/home.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -33,14 +34,13 @@ const INTERCEPTOR_PROVIDER: Provider = {
     AppComponent,
     DashboardComponent,
     NotFoundComponent,
-    LoaderComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AuthModule,
-    UsersModule,
     HttpClientModule,
     MatProgressBarModule,
     MatSidenavModule,
@@ -50,6 +50,8 @@ const INTERCEPTOR_PROVIDER: Provider = {
     MatListModule,
     MatToolbarModule,
     MatMenuModule,
+    CustomersModule,
+    MatGridListModule,
   ],
   providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent],

@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   Router,
@@ -7,7 +8,9 @@ import {
   NavigationCancel,
   NavigationError,
 } from '@angular/router';
+import { User } from './models/user';
 import { AuthenticationService } from './_services/authentication.service';
+import { HttpService } from './_services/http.service';
 import { NavigationService } from './_services/navigation.service';
 
 @Component({
@@ -18,30 +21,27 @@ import { NavigationService } from './_services/navigation.service';
 export class AppComponent implements OnInit {
   title = 'ng-crm';
   isLoading = true;
+  panelState = false;
+  profileState = false;
+  userProfile: User;
 
   constructor(
     private router: Router,
     private navigationService: NavigationService,
-    public authService: AuthenticationService
+    public authService: AuthenticationService,
+    private httpService: HttpService
   ) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event: Event) => {
-      switch (true) {
-        case event instanceof NavigationStart: {
-          this.isLoading = true;
-          break;
-        }
-        case event instanceof NavigationEnd:
-        case event instanceof NavigationCancel:
-        case event instanceof NavigationError: {
-          this.isLoading = false;
-          break;
-        }
-        default: {
-          break;
-        }
-      }
+      this.navigationService.loader(event, this.isLoading);
+    });
+
+    this.httpService.getUser(4).subscribe({
+      next: (user) => {
+        this.userProfile = user;
+      },
+      error: (err) => console.log(err),
     });
   }
 }
