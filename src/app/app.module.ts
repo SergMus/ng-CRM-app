@@ -21,6 +21,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CustomersModule } from './customers/customers.module';
 import { HomeComponent } from './home/home.component';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { FilterPipe } from './_pipes/filter.pipe';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -35,6 +36,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
     DashboardComponent,
     NotFoundComponent,
     HomeComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
