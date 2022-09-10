@@ -1,1 +1,19 @@
-<p>not-found works!</p>
+<div class="exception-body notfound">
+  <div class="exception-panel">
+    <div class="exception-image">
+      <img src="./../../assets/icon-404.png" width="50px" />
+    </div>
+    <div class="exception-detail">
+      <h1>{{ "page not found" | uppercase }}</h1>
+      <p>Requested resource is not available.</p>
+      <button
+        mat-raised-button
+        color="primary"
+        routerLink="/dashboard"
+        style="margin-top: '20px'"
+      >
+        <span>{{ "go to dashboard" | uppercase }}</span>
+      </button>
+    </div>
+  </div>
+</div>
