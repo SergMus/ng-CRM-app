@@ -1,8 +1,9 @@
+
+.table {
 .spacer {
   flex: 1 1 auto;
 }
 
-table {
   width: 100%;
   table-layout: fixed;
   th,
@@ -13,9 +14,14 @@ table {
     white-space: nowrap;
     text-align: center;
   }
+
+  .image {
+    width: 80px;
+    }
   th {
     font-weight: 700;
     font-size: 18px;
+
   }
 }
 

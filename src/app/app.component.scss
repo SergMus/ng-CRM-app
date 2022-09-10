@@ -12,7 +12,16 @@
 
     .user {
       display: flex;
+
+      .image {
+        max-width: 50px;
+      }
     }
+  }
+
+  .mat-toolbar {
+    background-color: #001645;
+    color: #fff;
   }
 
   .profile-body {

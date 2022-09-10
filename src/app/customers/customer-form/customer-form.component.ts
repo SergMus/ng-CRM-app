@@ -11,6 +11,7 @@ import { HttpService } from 'src/app/_services/http.service';
   templateUrl: './customer-form.component.html',
   styleUrls: ['./customer-form.component.scss'],
 })
+
 export class CustomerFormComponent implements OnInit {
   pageTitle = 'create customer';
   form: FormGroup;
@@ -62,4 +63,5 @@ export class CustomerFormComponent implements OnInit {
       });
     }
   }
+
 }

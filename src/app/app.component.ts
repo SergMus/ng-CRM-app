@@ -13,6 +13,8 @@ import { AuthenticationService } from './_services/authentication.service';
 import { HttpService } from './_services/http.service';
 import { NavigationService } from './_services/navigation.service';
 
+const REGISTRATION_USER_ID = 4;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -37,8 +39,8 @@ export class AppComponent implements OnInit {
       this.navigationService.loader(event, this.isLoading);
     });
 
-    this.httpService.getUser(4).subscribe({
-      next: (user) => {
+    this.httpService.getUser(REGISTRATION_USER_ID).subscribe({
+      next: (user: User) => {
         this.userProfile = user;
       },
       error: (err) => console.log(err),

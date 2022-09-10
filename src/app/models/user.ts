@@ -5,3 +5,7 @@ export interface User {
   id: number;
   last_name: string;
 }
+
+export interface UserEndponit {
+  data: User;
+}
