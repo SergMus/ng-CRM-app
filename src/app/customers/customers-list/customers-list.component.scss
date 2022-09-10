@@ -1,11 +1,7 @@
-
 .table {
-.spacer {
-  flex: 1 1 auto;
-}
-
   width: 100%;
   table-layout: fixed;
+
   th,
   td {
     overflow: hidden;
@@ -17,12 +13,15 @@
 
   .image {
     width: 80px;
-    }
+  }
+
   th {
     font-weight: 700;
     font-size: 18px;
-
   }
+}
+.spacer {
+  flex: 1 1 auto;
 }
 
 th.mat-sort-header-sorted {

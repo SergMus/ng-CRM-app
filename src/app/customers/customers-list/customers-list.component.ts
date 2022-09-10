@@ -34,7 +34,6 @@ export class CustomersListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  ngOnInit(): void {
   refreshData(data: any) {
     this.customers = data.users;
     this.dataSource = new MatTableDataSource(this.customers);
