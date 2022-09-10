@@ -1,4 +1,4 @@
-table {
+.table {
   width: 100%;
   table-layout: fixed;
   th,
@@ -8,6 +8,9 @@ table {
     text-overflow: ellipsis;
     white-space: nowrap;
     text-align: center;
+  }
+  .image {
+    width: 80px;
   }
 }
 

@@ -1,4 +1,9 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+<table
+  mat-table
+  [dataSource]="dataSource"
+  class="mat-elevation-z8 table"
+  matSort
+>
   <!-- Position Column -->
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: '50px'">
@@ -17,8 +22,8 @@
         *ngIf="element.image"
         [src]="element.image"
         [title]="element.firstName + ' ' + element.lastName"
-        style="width: '80px'"
-        alt=""
+        class="image"
+        alt="avatar"
       />
     </td>
   </ng-container>
