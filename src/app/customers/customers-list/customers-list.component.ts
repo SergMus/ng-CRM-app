@@ -9,12 +9,12 @@ import { HttpService } from 'src/app/_services/http.service';
   templateUrl: './customers-list.component.html',
   styleUrls: ['./customers-list.component.scss'],
 })
-export class CustomersListComponent implements OnInit, AfterViewInit {
+export class CustomersListComponent implements OnInit {
   pageTitle = 'Customers';
 
   customers: Customer[] = [];
   dataSource: any = null;
-  displayedColumns: string[] = [
+  displayedColumns: readonly string[] = [
     'position',
     'image',
     'firstname',
@@ -26,8 +26,6 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
   constructor(private httpService: HttpService) {}
 
   @ViewChild(MatSort) sort: MatSort;
-
-  ngAfterViewInit() {}
 
   ngOnInit(): void {
     this.httpService.getCustomers().subscribe({

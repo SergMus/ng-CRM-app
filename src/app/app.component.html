@@ -20,11 +20,7 @@
         <div class="user">
           <mat-card-header>
             <div mat-card-avatar class="header-image">
-              <img
-                [src]="userProfile.avatar"
-                alt=""
-                style="max-width: '50px'"
-              />
+              <img [src]="userProfile.avatar" alt="user avatar" class="image" />
             </div>
 
             <mat-card-title>Admin</mat-card-title>
@@ -91,7 +87,7 @@
 
     <!-- Content -->
     <mat-sidenav-content>
-      <mat-toolbar dark style="background-color: #001645; color: #fff">
+      <mat-toolbar dark class="mat-toolbar">
         <button
           mat-icon-button
           class="example-icon"
