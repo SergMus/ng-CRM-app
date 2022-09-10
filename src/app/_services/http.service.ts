@@ -34,4 +34,11 @@ export class HttpService {
       .get<Customer[]>('https://dummyjson.com/users', { params })
       .pipe(catchError(httpError));
   }
+
+  createCustomer(customer: Customer): Observable<Customer> {
+    return this.http.post<Customer>(
+      'https://dummyjson.com/users/add',
+      customer
+    );
+  }
 }

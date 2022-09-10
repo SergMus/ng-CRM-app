@@ -7,7 +7,12 @@
 
   <mat-toolbar>
     <mat-toolbar-row style="background-color: '#cccc'; height: 80px">
-      <button mat-mini-fab color="#BABABA" style="margin-right: 10px">
+      <button
+        mat-mini-fab
+        color="#BABABA"
+        style="margin-right: 10px"
+        routerLink="/customers/create/"
+      >
         <mat-icon>add</mat-icon>
       </button>
 
@@ -23,13 +28,14 @@
             #myInput
             placeholder="search"
             (input)="onInput(myInput)"
+            style="padding-left: 5px"
           />
         </mat-form-field>
 
         <mat-form-field style="width: 100px; font-size: 14px">
           <mat-label>find by</mat-label>
           <mat-select #mySelect (selectionChange)="onSelect(mySelect)">
-            <mat-option *ngFor="let item of displayedColumns" [value]="item">
+            <mat-option *ngFor="let item of selectOptions" [value]="item">
               {{ item }}
             </mat-option>
           </mat-select>
@@ -96,4 +102,10 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
 </mat-card>

@@ -17,7 +17,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [CustomerFormComponent, CustomersListComponent],
@@ -29,7 +30,7 @@ import { FormsModule } from '@angular/forms';
         component: CustomersListComponent,
       },
       {
-        path: 'create/',
+        path: 'create',
         component: CustomerFormComponent,
       },
       {
@@ -53,6 +54,8 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
   ],
   exports: [CustomerFormComponent, CustomersListComponent],
 })

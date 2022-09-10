@@ -6,6 +6,7 @@ import { HttpService } from 'src/app/_services/http.service';
 import { MatSelect } from '@angular/material/select';
 import { MatInput } from '@angular/material/input';
 import { DataSource } from '@angular/cdk/collections';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-customers-list',
@@ -25,18 +26,19 @@ export class CustomersListComponent implements OnInit {
     'email',
     'phone',
   ];
-  opened: boolean;
-  selectedOption: string;
+  options: string[] = [];
+  selectOptions: string[] = ['firstName', 'lastName', 'email', 'phone'];
 
   constructor(private httpService: HttpService) {}
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   refreshData(data: any) {
     this.customers = data.users;
     this.dataSource = new MatTableDataSource(this.customers);
     this.dataSource.sort = this.sort;
-    console.log(this.dataSource);
+    this.dataSource.paginator = this.paginator;
   }
 
   getUsers() {
@@ -55,7 +57,8 @@ export class CustomersListComponent implements OnInit {
   }
 
   onSelect(option: MatSelect) {
-    let column = option.value;
+    let column: string = option.value;
+
     this.dataSource.filterPredicate = (d: any, filter: string) => {
       const textToSearch = (d[column] && d[column].toLowerCase()) || '';
       return textToSearch.indexOf(filter) !== -1;
