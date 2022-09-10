@@ -18,7 +18,7 @@ export class CustomersListComponent implements OnInit {
 
   customers: Customer[] = [];
   dataSource: any = null;
-  displayedColumns: string[] = [
+  displayedColumns: readonly string[] = [
     'position',
     'image',
     'firstname',
