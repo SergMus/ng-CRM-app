@@ -15,6 +15,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [CustomerFormComponent, CustomersListComponent],
@@ -26,7 +30,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
         component: CustomersListComponent,
       },
       {
-        path: 'create/',
+        path: 'create',
         component: CustomerFormComponent,
       },
       {
@@ -47,6 +51,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatToolbarModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSelectModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
   ],
   exports: [CustomerFormComponent, CustomersListComponent],
 })
