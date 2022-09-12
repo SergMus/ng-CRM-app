@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, filter, Observable, tap, map } from 'rxjs';
-import { Customer } from '../models/customer';
+import { Customer, CustomerEndpoint } from '../models/customer';
 import { User, UserEndponit } from '../models/user';
 import { httpError } from './http-error.service';
 
@@ -26,14 +26,14 @@ export class HttpService {
     return this.http.get<Customer>(`https://dummyjson.com/users/${id}`);
   }
 
-  getCustomers(): Observable<Customer[]> {
+  getCustomers(): Observable<CustomerEndpoint> {
     let params = new HttpParams();
     params = params.appendAll({
       select: ['id,firstName,lastName,image,phone,email'],
     });
 
     return this.http
-      .get<Customer[]>('https://dummyjson.com/users', { params })
+      .get<CustomerEndpoint>('https://dummyjson.com/users', { params })
       .pipe(catchError(httpError));
   }
 

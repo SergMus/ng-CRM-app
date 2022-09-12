@@ -6,3 +6,7 @@ export interface Customer {
   phone: string;
   image: string;
 }
+
+export interface CustomerEndpoint {
+  users: Customer[];
+}

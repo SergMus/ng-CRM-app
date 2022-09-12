@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="form" [formGroup]="form" (ngSubmit)="submit(); openSnackBar()">
+  <form class="form" [formGroup]="form" (ngSubmit)="submit()">
     <mat-card class="card">
       <mat-card-header>
         <mat-card-title>
@@ -97,19 +97,58 @@
             </td>
           </tr>
         </table>
-
-        <button
-          mat-raised-button
-          style="
-            margin-left: auto;
-            display: block;
-            background-color: #076be7;
-            color: 'white';
-          "
-        >
-          Add customer
-        </button>
+        <div class="input-file-container">
+          <label for="fileInp" class="input-label">
+            <input
+              type="file"
+              class="input-file"
+              id="fileInp"
+              accept=".jpg, .jpeg, .png, .gif"
+              (input)="onInputFile($event)"
+              formControlName="image"
+            />
+          </label>
+          <mat-icon class="attach-icon">attachment</mat-icon>
+          <span
+            [ngClass]="
+              form.get('image')?.hasError('required') &&
+              !isFile &&
+              form.get('image')?.touched
+                ? 'danger'
+                : ''
+            "
+          >
+            {{ inputFileText }}
+          </span>
+        </div>
+        <div class="fileError">
+          <div
+            *ngIf="
+              form.get('image')?.invalid &&
+              form.get('image')?.touched &&
+              !isFile
+            "
+            class="danger"
+          >
+            <small>Field id required</small>
+          </div>
+        </div>
+        <div class="btn-container">
+          <button type="reset" mat-raised-button class="btn reset">
+            Reset form
+          </button>
+          <button
+            mat-raised-button
+            class="btn submit"
+            [disabled]="form.invalid"
+          >
+            Add customer
+          </button>
+        </div>
       </mat-card-content>
     </mat-card>
+    <button mat-mini-fab class="btn-close" (click)="closeForm()">
+      <mat-icon class="close-icon" fontIcon="clear"></mat-icon>
+    </button>
   </form>
 </div>

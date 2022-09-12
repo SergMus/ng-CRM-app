@@ -1,5 +1,11 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import {
   Router,
   Event,
@@ -14,6 +20,7 @@ import { HttpService } from './_services/http.service';
 import { NavigationService } from './_services/navigation.service';
 
 const REGISTRATION_USER_ID = 4;
+type UserProfile = User | null;
 
 @Component({
   selector: 'app-root',
@@ -25,7 +32,12 @@ export class AppComponent implements OnInit {
   isLoading = true;
   panelState = false;
   profileState = false;
-  userProfile: User;
+  cardState = false;
+  userProfile: UserProfile;
+  readonly _iconOpen = 'keyboard_tab';
+  readonly _iconClose = 'toc';
+
+  @ViewChild('leftMenu') menu: ElementRef<any>;
 
   constructor(
     private router: Router,
@@ -43,7 +55,23 @@ export class AppComponent implements OnInit {
       next: (user: User) => {
         this.userProfile = user;
       },
-      error: (err) => console.log(err),
+      error: (err: Error) => console.log(err),
     });
+  }
+
+  panelToggle() {
+    this.panelState = !this.panelState;
+  }
+
+  cardToggle() {
+    this.cardState = !this.cardState;
+  }
+
+  get iconOpen() {
+    return this._iconOpen;
+  }
+
+  get iconClose() {
+    return this._iconClose;
   }
 }

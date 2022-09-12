@@ -1,4 +1,4 @@
-import { Customer } from '../../models/customer';
+import { Customer, CustomerEndpoint } from '../../models/customer';
 import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -17,7 +17,7 @@ export class CustomersListComponent implements OnInit {
   pageTitle = 'Customers';
 
   customers: Customer[] = [];
-  dataSource: any = null;
+  dataSource: MatTableDataSource<Customer>;
   displayedColumns: readonly string[] = [
     'position',
     'image',
@@ -34,7 +34,7 @@ export class CustomersListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  refreshData(data: any) {
+  refreshData(data: CustomerEndpoint) {
     this.customers = data.users;
     this.dataSource = new MatTableDataSource(this.customers);
     this.dataSource.sort = this.sort;
@@ -43,10 +43,10 @@ export class CustomersListComponent implements OnInit {
 
   getUsers() {
     this.httpService.getCustomers().subscribe({
-      next: (resp: any) => {
+      next: (resp: CustomerEndpoint) => {
         this.refreshData(resp);
       },
-      error: (err) => {
+      error: (err: Error) => {
         console.log(err);
       },
     });
@@ -59,8 +59,11 @@ export class CustomersListComponent implements OnInit {
   onSelect(option: MatSelect) {
     let column: string = option.value;
 
-    this.dataSource.filterPredicate = (d: any, filter: string) => {
-      const textToSearch = (d[column] && d[column].toLowerCase()) || '';
+    this.dataSource.filterPredicate = (d: Customer, filter: string) => {
+      const textToSearch =
+        (d[column as keyof Customer] &&
+          d[column as keyof Customer]?.toString().toLowerCase()) ||
+        '';
       return textToSearch.indexOf(filter) !== -1;
     };
   }
