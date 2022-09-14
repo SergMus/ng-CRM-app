@@ -1,6 +1,5 @@
 import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,13 +22,22 @@ import { HomeComponent } from './home/home.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { FilterPipe } from './_pipes/filter.pipe';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { LoaderInterceptor } from './_interceptors/loader.interceptor';
 
-const INTERCEPTOR_PROVIDER: Provider = {
-  provide: HTTP_INTERCEPTORS,
-  useClass: AuthInterceptor,
-  multi: true,
-  deps: [AuthenticationService],
-};
+const INTERCEPTOR_PROVIDER: Provider = [
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+    deps: [AuthenticationService],
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoaderInterceptor,
+    multi: true,
+  },
+];
 
 @NgModule({
   declarations: [
@@ -39,6 +47,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
     HomeComponent,
     FilterPipe,
     SnackBarComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

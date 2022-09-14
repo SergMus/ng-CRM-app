@@ -29,7 +29,7 @@ type UserProfile = User | null;
 })
 export class AppComponent implements OnInit {
   title = 'ng-crm';
-  isLoading = true;
+  isLoading = false;
   panelState = false;
   profileState = false;
   cardState = false;
