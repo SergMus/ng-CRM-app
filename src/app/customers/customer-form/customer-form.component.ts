@@ -11,9 +11,10 @@ import { HttpService } from 'src/app/_services/http.service';
   templateUrl: './customer-form.component.html',
   styleUrls: ['./customer-form.component.scss'],
 })
-
 export class CustomerFormComponent implements OnInit {
   pageTitle = 'create customer';
+  inputFileText = 'Set avatar image';
+  isFile = false;
   form: FormGroup;
   matcher = new ErrorStateMatcherService();
 
@@ -38,6 +39,7 @@ export class CustomerFormComponent implements OnInit {
         Validators.required,
         Validators.pattern(new RegExp('[+][0-9 ]{12}')),
       ]),
+      image: new FormControl('', [Validators.required]),
     });
   }
 
@@ -54,6 +56,7 @@ export class CustomerFormComponent implements OnInit {
       });
       this.router.navigate(['customers']);
     }
+    this.openSnackBar();
   }
 
   openSnackBar() {
@@ -64,4 +67,16 @@ export class CustomerFormComponent implements OnInit {
     }
   }
 
+  onInputFile(file: Event) {
+    let uploadFile = file.target as HTMLInputElement;
+    if (uploadFile.files![0]) {
+      this.inputFileText = uploadFile.files![0].name;
+      this.isFile = true;
+      console.log(uploadFile.files![0]);
+    }
+  }
+
+  closeForm() {
+    this.router.navigate(['/customers']);
+  }
 }

@@ -2,7 +2,7 @@
   <div *ngIf="errorMessage; then errorBlock; else formBlock"></div>
   <ng-template #formBlock>
     <form (ngSubmit)="onSubmit()" class="form" [formGroup]="form">
-      <img src="./../../../assets/crm.webp" alt="" width="300" />
+      <img src="./../../../assets/crm.webp" alt="logo" width="300" />
       <h1>Sign in</h1>
       <mat-form-field appearance="fill" class="form-control">
         <mat-label>Enter your email</mat-label>
@@ -62,8 +62,8 @@
       <button
         mat-raised-button
         color="accent"
-        (click)="errorMessage = ''"
-        style="margin-left: '10px'; max-width: '200px'"
+        (click)="errorToggle()"
+        class="btn-error"
       >
         back to Sign in
       </button>

@@ -56,5 +56,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    .btn-error {
+      margin-left: 10px;
+      max-width: 200px;
+    }
   }
 }

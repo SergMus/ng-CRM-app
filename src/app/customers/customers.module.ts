@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CustomerEditGuard } from '../_guards/customer-edit.guard';
 
 @NgModule({
   declarations: [CustomerFormComponent, CustomersListComponent],
@@ -32,10 +33,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
       {
         path: 'create',
         component: CustomerFormComponent,
+        canDeactivate: [CustomerEditGuard],
       },
       {
         path: 'edit/:id',
         component: CustomerFormComponent,
+        canActivate: [CustomerEditGuard],
       },
     ]),
     MatProgressBarModule,
@@ -57,6 +60,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     MatSnackBarModule,
   ],
+  providers: [CustomerEditGuard],
   exports: [CustomerFormComponent, CustomersListComponent],
 })
 export class CustomersModule {}

@@ -19,7 +19,7 @@ const USER_PASSWORD = 'pistol';
 export class LoginComponent implements OnInit {
   hide = true;
   form: FormGroup;
-  errorMessage: string;
+  errorMessage: boolean;
 
   constructor(
     private authService: AuthenticationService,
@@ -51,5 +51,9 @@ export class LoginComponent implements OnInit {
         },
       });
     }
+  }
+
+  errorToggle() {
+    this.errorMessage = !this.errorMessage;
   }
 }
