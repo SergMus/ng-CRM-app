@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SnackBarComponent } from 'src/app/snack-bar/snack-bar.component';
 import { ErrorStateMatcherService } from 'src/app/_services/error-state-matcher.service';
 import { HttpService } from 'src/app/_services/http.service';
+import { Customer } from '../../models/customer';
 
 @Component({
   selector: 'app-customer-form',
@@ -17,11 +18,13 @@ export class CustomerFormComponent implements OnInit {
   isFile = false;
   form: FormGroup;
   matcher = new ErrorStateMatcherService();
+  customer: Customer | null;
 
   constructor(
     private httpService: HttpService,
     private router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +43,12 @@ export class CustomerFormComponent implements OnInit {
         Validators.pattern(new RegExp('[+][0-9 ]{12}')),
       ]),
       image: new FormControl('', [Validators.required]),
+    });
+
+    let userId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.httpService.getCustomer(+userId!).subscribe((user) => {
+      this.customer = user;
+      console.log(this.customer);
     });
   }
 

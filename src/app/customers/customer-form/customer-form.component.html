@@ -17,6 +17,7 @@
                   matInput
                   formControlName="firstName"
                   [errorStateMatcher]="matcher"
+                  [value]="customer?.firstName"
                 />
                 <mat-error
                   *ngIf="
@@ -38,6 +39,7 @@
                   type="email"
                   formControlName="lastName"
                   [errorStateMatcher]="matcher"
+                  [value]="customer?.lastName"
                 />
                 <mat-error
                   *ngIf="
@@ -60,6 +62,7 @@
                   matInput
                   formControlName="email"
                   [errorStateMatcher]="matcher"
+                  [value]="customer?.email"
                 />
                 <mat-error
                   *ngIf="
@@ -81,6 +84,7 @@
                   matInput
                   formControlName="phone"
                   [errorStateMatcher]="matcher"
+                  [value]="customer?.phone"
                 />
                 <mat-error
                   *ngIf="

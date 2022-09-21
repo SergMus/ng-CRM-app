@@ -39,6 +39,7 @@ import { CustomerEditGuard } from '../_guards/customer-edit.guard';
         path: 'edit/:id',
         component: CustomerFormComponent,
         canActivate: [CustomerEditGuard],
+        canDeactivate: [CustomerEditGuard],
       },
     ]),
     MatProgressBarModule,

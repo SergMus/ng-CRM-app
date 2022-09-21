@@ -1,11 +1,9 @@
 import { Customer, CustomerEndpoint } from '../../models/customer';
-import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
-import { MatSort, Sort } from '@angular/material/sort';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { HttpService } from 'src/app/_services/http.service';
 import { MatSelect } from '@angular/material/select';
-import { MatInput } from '@angular/material/input';
-import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
@@ -25,6 +23,7 @@ export class CustomersListComponent implements OnInit {
     'lastname',
     'email',
     'phone',
+    'edit',
   ];
   options: string[] = [];
   selectOptions: string[] = ['firstName', 'lastName', 'email', 'phone'];
